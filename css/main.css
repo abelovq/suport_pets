@@ -555,9 +555,9 @@ ul.collapsible > li {
   margin: 0 auto;
   font-family: 'Montserrat', sans-serif; }
   .pets-section .carousel {
-    height: 500px; }
+    height: 550px; }
     .pets-section .carousel .carousel-item {
-      width: 260px;
+      width: 350px;
       height: fit-content; }
       .pets-section .carousel .carousel-item .card-image .card-badge {
         position: absolute;
@@ -581,3 +581,18 @@ ul.collapsible > li {
         color: #57ced3 !important; }
         .pets-section .carousel .carousel-item .card-action a:hover {
           color: #ff8d8f !important; }
+    .pets-section .carousel__prev-btn {
+      background: none;
+      border: none;
+      cursor: pointer; }
+      .pets-section .carousel__prev-btn img {
+        width: 15px;
+        height: 15px;
+        transform: rotate(-180deg); }
+    .pets-section .carousel__next-btn {
+      background: none;
+      border: none;
+      cursor: pointer; }
+      .pets-section .carousel__next-btn img {
+        width: 15px;
+        height: 15px; }

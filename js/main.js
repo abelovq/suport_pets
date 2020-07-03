@@ -1,9 +1,9 @@
 //for the datapicker
 const currYear = new Date().getFullYear();
 
-const apiUrl = 'http://104.248.191.131/sql/'
+const apiUrl = 'http://104.248.191.131/sql/';
 
-$(document).ready(function() {
+$(document).ready(function () {
   //Select field
   $('select').formSelect();
   //Tooltips
@@ -24,7 +24,7 @@ $(document).ready(function() {
     $('.nav-tooltipped').tooltip('destroy');
   }
   // Left menu actions
-  $('.openLeftMenu').click(function() {
+  $('.openLeftMenu').click(function () {
     $(this).toggleClass('rotate');
     $('.left-menu-logo').toggleClass('large-logo');
     if ($('.left-menu').width() <= 60) {
@@ -47,32 +47,38 @@ $(document).ready(function() {
     // setDefaultDate: new Date(2000,01,31),
     // maxDate: new Date(currYear - 5, 12, 31),
     yearRange: [1945, currYear - 1],
-    format: 'mm/dd/yyyy'
+    format: 'mm/dd/yyyy',
   });
 
   //Tabs with forms
   $('.collapsible').collapsible({
-    accordion: false
+    accordion: false,
   });
 
-  
   // $('.carousel').carousel({ noWrap: true, dist: 0, shift: 0 });
-  
-  const switchTo = prepareSections({ ['pets-section']: () => $('.carousel').carousel({ noWrap: true, dist: 0, shift: 0 }) });
+
+  const switchTo = prepareSections({
+    ['pets-section']: () =>
+      $('.carousel').carousel({ noWrap: true, dist: 0, shift: 0 }),
+  });
   $('.menu-link').each(function () {
     if ($(this).data('section')) {
       $(this).click(() => switchTo($(this).data('section')));
     }
   });
-  
+
   const userId = 2240;
   loadUserInfo(userId);
   loadPetsInfo(userId);
 });
 
 async function loadUserInfo(userId) {
-  const response = await fetch(`${apiUrl}sql_get_contact_by_id.php?id=${userId}`, { mode: 'no-cors' });
+  const response = await fetch(
+    `${apiUrl}sql_get_contact_by_id.php?id=${userId}`,
+    { mode: 'no-cors' }
+  );
   const json = await response.json();
+  console.log('json', json);
   // const json = JSON.parse('[{"contact_id":"2240","firstname":"Alex","lastname":"Sokolov","birthday":"2018-12-31","email":"alex.code.keen@gmail.com","gender":"1","is_over_18":"1"}]');
   const userData = json[0];
 
@@ -92,26 +98,29 @@ async function loadUserInfo(userId) {
   Object.entries(userData).forEach(([key, value]) => {
     profileForm.find(`#${key}`).val(value);
     profileForm.find(`label[for="${key}"]`).toggleClass('active');
-  })
+  });
 }
 
 async function loadPetsInfo(userId) {
   try {
-    const response = await fetch(`${apiUrl}sql_get_pets_by_id.php?id=${userId}`, { mode: 'no-cors' });
+    const response = await fetch(
+      `${apiUrl}sql_get_pets_by_id.php?id=${userId}`,
+      { mode: 'no-cors' }
+    );
     const json = await response.json();
+
     // const json = [{ full: 'bruh bruh bruh', short: 'bruh', breed: 'bruh terier', weight: 6.9, staus: true }];
-    
-    const populateItem = (pet) => 
+
+    const populateItem = (pet) =>
       `<div class="carousel-item row"">\
         <div class="col">\
           <div class="card">\
             <div class="card-image">\
               <img src="img/cat.jpg">\
               ${
-                pet.status ?
-                  '<span class="card-badge red"><i class="material-icons">warning</i> ESA isn\'t active</span>'
-                :
-                  '<span class="card-badge green"><i class="material-icons">done</i> ESA is active</span>'
+                pet.status
+                  ? '<span class="card-badge red"><i class="material-icons">warning</i> ESA isn\'t active</span>'
+                  : '<span class="card-badge green"><i class="material-icons">done</i> ESA is active</span>'
               }
               <span class="card-title">${pet.full}</span>\
             </div>\
@@ -128,18 +137,21 @@ async function loadPetsInfo(userId) {
           </div>\
         </div>\
       </div>`;
-  
-      if (json.length > 0) {
-        const carousel = $('section#pets-section .carousel');
-        json.forEach((pet) => {
-          carousel.append(populateItem(pet))
+
+    if (json.length > 0) {
+      const carousel = $('section#pets-section .carousel');
+      json.forEach((pet) => {
+        carousel.append(populateItem(pet));
       });
     }
-    $('.carousel').carousel({ noWrap: true, dist: 0, shift: 0 });
+    $('.carousel').carousel({
+      noWrap: true,
+      dist: 0,
+      shift: 0,
+    });
   } catch (error) {
     console.log(error);
   }
-
 }
 
 function prepareSections(callbacks) {
@@ -152,17 +164,15 @@ function prepareSections(callbacks) {
     $(`#${sectionID}`).removeClass('hidden');
     if (callbacks[sectionID]) callbacks[sectionID]();
     lastSection = sectionID;
-  }
+  };
 }
 
 // Show picked photo of user's pet
 function readURL(input) {
   if (input.files && input.files[0]) {
     const reader = new FileReader();
-    reader.onload = function(e) {
-      $('#petPhoto')
-        .attr('src', e.target.result)
-        .removeClass('hidden');
+    reader.onload = function (e) {
+      $('#petPhoto').attr('src', e.target.result).removeClass('hidden');
     };
     reader.readAsDataURL(input.files[0]);
   }
