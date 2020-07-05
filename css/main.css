@@ -557,8 +557,9 @@ ul.collapsible > li {
   .pets-section .carousel {
     height: 550px; }
     .pets-section .carousel .carousel-item {
-      width: 350px;
-      height: fit-content; }
+      width: 260px;
+      height: 450px;
+      cursor: pointer; }
       .pets-section .carousel .carousel-item .card-image .card-badge {
         position: absolute;
         bottom: 0px;
@@ -581,18 +582,25 @@ ul.collapsible > li {
         color: #57ced3 !important; }
         .pets-section .carousel .carousel-item .card-action a:hover {
           color: #ff8d8f !important; }
-    .pets-section .carousel__prev-btn {
-      background: none;
-      border: none;
-      cursor: pointer; }
-      .pets-section .carousel__prev-btn img {
-        width: 15px;
-        height: 15px;
-        transform: rotate(-180deg); }
-    .pets-section .carousel__next-btn {
-      background: none;
-      border: none;
-      cursor: pointer; }
-      .pets-section .carousel__next-btn img {
-        width: 15px;
-        height: 15px; }
+    .pets-section .carousel__btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 2; }
+      .pets-section .carousel__btn.prev-btn {
+        background: none;
+        border: none;
+        left: 0;
+        cursor: pointer; }
+        .pets-section .carousel__btn.prev-btn img {
+          width: 20px;
+          height: 20px;
+          transform: rotate(-180deg); }
+      .pets-section .carousel__btn.next-btn {
+        background: none;
+        border: none;
+        right: 0;
+        cursor: pointer; }
+        .pets-section .carousel__btn.next-btn img {
+          width: 20px;
+          height: 20px; }

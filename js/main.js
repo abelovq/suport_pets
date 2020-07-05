@@ -13,6 +13,19 @@ $(document).ready(function () {
   let windowSize = $(window).width();
 
   $(window).resize(() => (windowSize = $(window).width()));
+  // $('.carousel').carousel();
+  // console.log($('.carousel').carousel())
+  //   // {
+  //   //   dist: 0,
+  //   //   padding: 0,
+  //   //   // fullWidth: true,
+  //   //   indicators: true,
+  //   //   duration: 300,
+  //   // }
+  // );
+  // $('.carousel-item').removeClass('active');
+  // $('.carousel-item:nth-child(3)').addClass('active');
+  // const carousel = $('section#pets-section .carousel');
 
   if (windowSize > 1100) {
     $('.openLeftMenu').toggleClass('rotate');
@@ -59,16 +72,18 @@ $(document).ready(function () {
 
   const switchTo = prepareSections({
     ['pets-section']: () =>
-      $('.carousel').carousel({ noWrap: true, dist: 0, shift: 0 }),
+      $('.carousel').carousel(),
   });
   $('.menu-link').each(function () {
     if ($(this).data('section')) {
-      $(this).click(() => switchTo($(this).data('section')));
+      $(this).click((e) => {
+        switchTo($(this).data('section'))
+      });
     }
   });
 
   const userId = 2240;
-  loadUserInfo(userId);
+  // loadUserInfo(userId);
   loadPetsInfo(userId);
 });
 
@@ -111,17 +126,17 @@ async function loadPetsInfo(userId) {
 
     // const json = [{ full: 'bruh bruh bruh', short: 'bruh', breed: 'bruh terier', weight: 6.9, staus: true }];
 
-    const populateItem = (pet) =>
-      `<div class="carousel-item row"">\
+    const populateItem = (pet) => ``;
+    `<div class="carousel-item">\
         <div class="col">\
           <div class="card">\
             <div class="card-image">\
               <img src="img/cat.jpg">\
               ${
-                pet.status
-                  ? '<span class="card-badge red"><i class="material-icons">warning</i> ESA isn\'t active</span>'
-                  : '<span class="card-badge green"><i class="material-icons">done</i> ESA is active</span>'
-              }
+      pet.status
+        ? '<span class="card-badge red"><i class="material-icons">warning</i> ESA isn\'t active</span>'
+        : '<span class="card-badge green"><i class="material-icons">done</i> ESA is active</span>'
+      }
               <span class="card-title">${pet.full}</span>\
             </div>\
             <div class="card-content">\
@@ -138,17 +153,30 @@ async function loadPetsInfo(userId) {
         </div>\
       </div>`;
 
-    if (json.length > 0) {
-      const carousel = $('section#pets-section .carousel');
-      json.forEach((pet) => {
-        carousel.append(populateItem(pet));
-      });
-    }
-    $('.carousel').carousel({
-      noWrap: true,
-      dist: 0,
-      shift: 0,
-    });
+    // if (json.length > 0) {
+    //   const carousel = $('section#pets-section .carousel');
+    //   json.forEach((pet) => {
+    //     carousel.append(populateItem(pet));
+    //   });
+    // }
+    // instance.set();
+    // $('.carousel').carousel(
+    //   // noWrap: true,
+    //   // dist: 100,
+    //   // shift: 0,
+    // );
+
+    // $('.carousel button').click(e => {
+    //   console.log(1)
+    //   e.preventDefault();
+    //   // e.stopPropagation();
+    //   $('.carousel').carousel('prev');
+    // })
+    // $('button.next-btn').click(e => {
+    //   e.preventDefault();
+    //   // e.stopPropagation();
+    //   $('.carousel').carousel('next');
+    // })
   } catch (error) {
     console.log(error);
   }

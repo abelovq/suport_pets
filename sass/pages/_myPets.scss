@@ -8,8 +8,9 @@
   .carousel {
     height: 550px;
     .carousel-item {
-      width: 350px;
-      height: fit-content;
+      width: 260px;
+      height: 450px;
+      cursor: pointer;
       // opacity: 1 !important;
       .card-image {
         .card-badge {
@@ -46,24 +47,33 @@
         }
       }
     }
-    &__prev-btn {
-      background: none;
-      border: none;
-      cursor: pointer;
-      img {
-        width: 15px;
-        height: 15px;
-        transform: rotate(-180deg);
+    &__btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 2;
+      &.prev-btn {
+        background: none;
+        border: none;
+        left: 0;
+        cursor: pointer;
+        img {
+          width: 20px;
+          height: 20px;
+          transform: rotate(-180deg);
+        }
+      }
+      &.next-btn {
+        background: none;
+        border: none;
+        right: 0;
+        cursor: pointer;
+        img {
+          width: 20px;
+          height: 20px;
+        }
       }
     }
-    &__next-btn {
-      background: none;
-      border: none;
-      cursor: pointer;
-      img {
-        width: 15px;
-        height: 15px;
-      }
-    }
+    
   }
 }
